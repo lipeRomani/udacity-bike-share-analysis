@@ -3,6 +3,7 @@
 # Começando com os imports
 import csv
 import matplotlib.pyplot as plt
+from functools import reduce
 
 COL_START = 0
 COL_END = 1
@@ -273,16 +274,18 @@ input("Aperte Enter para continuar...")
 # TAREFA 9
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas parTODO isso, como max() e min().
-trip_duration_list = column_to_list(data_list, 2)
+trip_duration_list = column_to_list(data_list, COL_DURATION)
 min_trip = 0.
 max_trip = 0.
 mean_trip = 0.
-median_trip = 0.
+median_trip = 0. 
 
 float_trip_list = sorted([float(trip) for trip in trip_duration_list])
+total_duration = reduce((lambda x, y: x + y), float_trip_list)
+
 min_trip = float_trip_list[0]
 max_trip = float_trip_list[-1]
-mean_trip = sum(float_trip_list) / len(float_trip_list)
+mean_trip = total_duration / len(float_trip_list)
 median_trip = float_trip_list[int(len(float_trip_list)/2)]
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
